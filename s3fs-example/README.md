@@ -1,8 +1,9 @@
-This is experimental, tested only with the concrete base image Alpine 3.16.2.
-Note this implementation requires running the container in privileged mode.
-The base image is published in cfro/direct-mount-test DockerHub repo.
+### Note
+- This is experimental, tested only with the Alpine 3.16.2 base image.
+- Requires running the container in privileged mode.
+- Docker image published in cfro/direct-mount-test DockerHub repo.
 
-How to run?
+### How to run?
 
 Apply configmap with the bucket name, endpoint and mountpoint:
 ```
