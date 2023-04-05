@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-direct-mount
+spec:
+  restartPolicy: Never
+  volumes:
+  - name: shared-data
+    emptyDir: {}
+  containers:
+  - name: main
+    image: cfro/direct-mount-test
+    imagePullPolicy: Always
+    securityContext:
+      privileged: true
+      capabilities:
+        add:
+          - SYS_ADMIN
+    env:
+      - name: AWSACCESSKEYID
+        valueFrom:
+          secretKeyRef:
+            name: awssecret
+            key: AWSACCESSKEYID
+      - name: AWSSECRETACCESSKEY
+        valueFrom:
+          secretKeyRef:
+            name: awssecret
+            key: AWSSECRETACCESSKEY
+      - name: BUCKET
+        valueFrom:
+         configMapKeyRef:
+          name: mountconfig
+          key: BUCKET
+      - name: MOUNTPOINT
+        valueFrom:
+         configMapKeyRef:
+           name: mountconfig
+           key: MOUNTPOINT
+      - name: S3URL
+        valueFrom:
+         configMapKeyRef:
+           name: mountconfig
+           key: S3URL
+    volumeMounts:
+    - name: shared-data
+      mountPath: /test
