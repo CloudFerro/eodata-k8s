@@ -1,12 +1,6 @@
 #!/bin/bash
 
-# mkdir -p $MOUNTPOINT 
-
 mkdir -p '/test'
-
-#S3URL='http://data.cloudferro.com'
-#BUCKET='DIAS'
-#MOUNTPOINT='/test'
 
 [[ -z "${S3UID}" ]] || FUSE_OPTS="$FUSE_OPTS -o uid=${S3UID}"
 [[ -z "${S3GID}" ]] || FUSE_OPTS="$FUSE_OPTS -o gid=${S3GID}"
